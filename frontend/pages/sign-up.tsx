@@ -8,6 +8,7 @@ import { Button } from '@material-ui/core';
 const Index: React.FC = () => {
   const signUp = async () => {
     const { user, session, error } = await db.auth.signUp({
+      // get these from user input
       email: 'test@sauntimo.org',
       password: 'example-password',
     });

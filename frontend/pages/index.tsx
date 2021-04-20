@@ -5,7 +5,6 @@ import Box from '@material-ui/core/Box';
 import ProTip from '../src/components/ProTip';
 import Link from '../src/components/Link';
 import Copyright from '../src/components/Copyright';
-// import { createClient } from '@supabase/supabase-js';
 
 export default function Index() {
   return (
@@ -23,10 +22,3 @@ export default function Index() {
     </Container>
   );
 }
-
-// export async function getStaticProps() {
-//   return createClient(
-//     process.env.DB_URL ?? '',
-//     process.env.DB_PUBLIC_ANON_KEY ?? '',
-//   );
-// }
