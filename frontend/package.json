@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "latest",
+    "@material-ui/lab": "*",
     "@supabase/postgrest-js": "^0.28.1",
     "@supabase/realtime-js": "^1.0.8",
     "@supabase/supabase-js": "^1.11.6",

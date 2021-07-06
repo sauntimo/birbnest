@@ -1,17 +1,31 @@
-import React from 'react';
-import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
+import React, { useState } from 'react';
+import {
+  Box,
+  Button,
+  Container,
+  FormControl,
+  FormHelperText,
+  Input,
+  InputLabel,
+} from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import Header from '../src/components/header';
 import { db } from '../database/db';
-import { Button } from '@material-ui/core';
 
 const Index: React.FC = () => {
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
+  const [error, setError] = useState<Error>();
+
   const signUp = async () => {
     const { user, session, error } = await db.auth.signUp({
-      // get these from user input
-      email: 'test@sauntimo.org',
-      password: 'example-password',
+      email,
+      password,
     });
+
+    if (error) {
+      setError(error);
+    }
 
     console.log(user, session, error);
   };
@@ -20,8 +34,38 @@ const Index: React.FC = () => {
     <Container maxWidth="sm">
       <Box my={4}>
         <Header />
-        <Button onClick={signUp}>Sign Up</Button>
+        <FormControl margin="normal">
+          <InputLabel htmlFor="email">Email address</InputLabel>
+          <Input
+            id="email"
+            aria-describedby="email-helper-text"
+            onChange={(e) => setEmail(e.currentTarget.value)}
+          />
+          <FormHelperText id="email-helper-text">
+            We'll never share your email.
+          </FormHelperText>
+        </FormControl>
+        <FormControl margin="normal">
+          <InputLabel htmlFor="password">Password</InputLabel>
+          <Input
+            id="password"
+            aria-describedby="password-helper-text"
+            onChange={(e) => setPassword(e.currentTarget.value)}
+          />
+          <FormHelperText id="password-helper-text">
+            Make it something good
+          </FormHelperText>
+        </FormControl>
+        <Button type="submit" onClick={signUp}>
+          Sign Up
+        </Button>
       </Box>
+
+      {error && (
+        <Alert variant="filled" severity="error">
+          {error.message}
+        </Alert>
+      )}
     </Container>
   );
 };
